@@ -26,6 +26,15 @@ adminSibling.on('message', message => {
     message.reply('@Kaew_SamA#6899  ไอเหี้ยแก้วเมื่อไหร่จะเข้าดิสไอสัส');
   }
 });
+adminSibling.on('guildMemberAdd', member => {
+  // Send the message to a designated channel on a server:
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+  // Do nothing if the channel wasn't found on this server
+  if (!channel) return;
+  // Send the message, mentioning the member
+  channel.send(`Welcome to the server, ${member}`);
+});
+
 adminSibling.on('message', message => { 
   if (message.content === 'ทอย') {
     let output = Function.dice(1,8)
