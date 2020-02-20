@@ -22,8 +22,8 @@ adminSibling.on('message', message => {
   }
 });
 adminSibling.on('message', message => { 
-  if (message.content === '@จะพยายามครับ') {
-    message.reply('ไอเหี้ยแก้วเมื่อไหร่จะเข้าดิสไอสัส');
+  if (message.content === 'แก้ว') {
+    message.reply('@จะพยายามครับ ไอเหี้ยแก้วเมื่อไหร่จะเข้าดิสไอสัส');
   }
 });
 adminSibling.on('message', message => { 
