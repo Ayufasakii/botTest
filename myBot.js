@@ -22,7 +22,7 @@ adminSibling.on('message', message => {
   }
 });
 adminSibling.on('message', message => { 
-  if (message.content === '@Kaew_SamA#6899 ') {
+  if (message.content === '@จะพยายามครับ') {
     message.reply('ไอเหี้ยแก้วเมื่อไหร่จะเข้าดิสไอสัส');
   }
 });
