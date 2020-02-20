@@ -17,6 +17,11 @@ adminSibling.on('message', message => {
   }
 });
 adminSibling.on('message', message => { 
+  if (message.content === 'สวัสดี') {
+    message.reply('ว่าไงไอสัสเจ้านายเหี้ยๆของข้า');
+  }
+});
+adminSibling.on('message', message => { 
   if (message.content === 'ทอย') {
     let output = Function.dice(1,8)
   if(output == 1){
