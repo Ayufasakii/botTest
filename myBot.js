@@ -22,6 +22,11 @@ adminSibling.on('message', message => {
   }
 });
 adminSibling.on('message', message => { 
+  if (message.content === '@Kaew_SamA#6899 ') {
+    message.reply('ไอเหี้ยแก้วเมื่อไหร่จะเข้าดิสไอสัส');
+  }
+});
+adminSibling.on('message', message => { 
   if (message.content === 'ทอย') {
     let output = Function.dice(1,8)
   if(output == 1){
