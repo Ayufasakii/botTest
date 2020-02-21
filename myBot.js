@@ -19,39 +19,24 @@ client.on("ready", () => {
         }
     }); 
 })
-client.on("typingStart", async channel => {
-  if(channel.id=='430359947012866048'){
-    client.on("message", async message => {
+
+  client.on("message", async message  => {
+      if(message.channel.id=='430359947012866048'){
       const prefix = ";;";
-      if (message.author.bot) return;
-      if (!message.guild) return;
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const cmd = args.shift().toLowerCase();
-      if(!message.content.startsWith(prefix)){
-        channel.sendMessage('ห้องนี้ไว้ใส่เพลงนะไอเหี้ย')
+      if(!message.content.startsWith(prefix)&&message.author.id!='680112001783169047'){
+        message.reply('ห้องนี้ไว้ใส่เพลงนะไอเหี้ย')
+      }
       }
     })
-  }
-})
 client.on("message", async message => {
   const prefix = "**";
-
-  // If the author's a bot, return
-  // If the message was not sent in a server, return
-  // If the message doesn't start with the prefix, return
   if (message.author.bot) return;
   if (!message.guild) return;
   if (!message.content.startsWith(prefix)) return;
-
-  // Arguments and command variable
-  // cmd is the first word in the message, aka the command
-  // args is an array of words after the command
-  // !say hello I am a bot
-  // cmd == say (because the prefix is sliced off)
-  // args == ["hello", "I", "am", "a", "bot"]
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
-
   if (cmd === "ping") {
       // Send a message
       const msg = await message.channel.sendMessage(`🏓 Pinging....`);
@@ -61,15 +46,9 @@ client.on("message", async message => {
   }
 
   if (cmd === "เรียก") {
-      // Check if you can delete the message
       if (message.deletable) message.delete();
 
       if (args.length == 0) return message.reply(`Nothing to say?`).then(m => m.delete(5000));
-      
-      // Role color
-
-      // If the first argument is embed, send an embed,
-      // otherwise, send a normal message
       if (args[0].toLowerCase() === "แก้ว") {
         await message.channel.sendMessage('เข้าดิสได้ละไอเหี้ยแก้ว <@284689915743305730>');
       }else if(args[0].toLowerCase() === "อัด") {
@@ -95,11 +74,19 @@ client.on("message", async message => {
     }
     
 }
+if (cmd === "สร้าง") {
+  if (message.deletable) message.delete();
+
+  if (args.length == 0) return message.reply(`Nothing to say?`).then(m => m.delete(5000));
+    await message.channel.sendMessage(message.author.username);
+    Function.createChar(message.author.username,args[0].toLowerCase(),args[1].toLowerCase())
+}
 });
-// When a message comes in, what's in these brackets will be executed
+
 client.on("message", async message => {
     console.log(`${message.author.username} said: ${message.content}`);
 });
+
 client.on('message', message => { 
   if (message.content === 'ทอย') {
     
@@ -125,5 +112,6 @@ client.on('message', message => {
   }
   }
 });
+
 // Login the bot
 client.login(config.TOKEN);
