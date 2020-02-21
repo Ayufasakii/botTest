@@ -22,8 +22,8 @@ adminSibling.on('message', message => {
   }
 });
 adminSibling.on('message', message => { 
-  if (message.content === 'แก้ว') {
-    MessageChannel.send('@Kaew_SamA#6899  ไอเหี้ยแก้วเมื่อไหร่จะเข้าดิสไอสัส');
+  if (message.content === 'test') {
+    message.channel.send('โอเค');
   }
 });
 adminSibling.on('guildMemberAdd', member => {
