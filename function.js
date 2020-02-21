@@ -15,6 +15,21 @@ exports.createChar = function createChar(name,gender,race){
     let setChar = docRef.set({
     name: name,
     gender: gender,
-    race: race
+    race: race,
+    Level:1,
+    Exp:0,
+    status:{
+      Str:0,
+      Agi:0,
+      Int:0,
+      Lux:0,
+      Crit:0,
+      Vit:0,
+    },
+    combatStatus:{
+      HP:0,
+      MP:0,
+      SP:0
+    }
     });
 }
