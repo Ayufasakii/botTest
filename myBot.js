@@ -1,42 +1,80 @@
+const { Client,RichEmbed } = require("discord.js");
+const  config  = require("./config.json");
 const Function = require('./function.js');
-const Discord = require('discord.js'); //เรียก discord.js มาใช้
-const adminSibling = new Discord.Client(); //ประกาศ client ขึ้นมา
-//event นี้ทำงานเมื่อ login สำเร็จ
-adminSibling.on('ready', () => {
-  console.log('Ready!');
+// Declares our bot,
+// the disableEveryone prevents the client to ping @everyone
+const client = new Client({
+    disableEveryone: true
 });
-//รอรับ event message เวลามีข้อความโผล่มาในแชท function นี้ก็จะทำงาน
-adminSibling.on('message', message => { 
-  if (message.content === 'ฉันรักเอมิเลีย') {
-    message.reply('ถึงยังไงเรมก็รักสุบารุค่ะ');
-  }
-});
-adminSibling.on('message', message => { 
-  if (message.content === 'สวัสดีพี่น้องของข้า') {
-    message.reply('ควยไรไอเด็กเบียว');
-  }
-});
-adminSibling.on('message', message => { 
-  if (message.content === 'สวัสดี') {
-    message.reply('ว่าไงไอสัสเจ้านายเหี้ยๆของข้า');
-  }
-});
-adminSibling.on('message', message => { 
-  if (message.content === 'test') {
-    message.channel.send('โอเค');
-  }
-});
-adminSibling.on('guildMemberAdd', member => {
-  // Send the message to a designated channel on a server:
-  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
-  // Send the message, mentioning the member
-  channel.send(`Welcome to the server, ${member}`);
-});
+// When the bot's online, what's in these brackets will be executed
+client.on("ready", () => {
+    console.log(`Hi, ${client.user.username} is now online!`);
 
-adminSibling.on('message', message => { 
+    // Set the user presence
+    client.user.setPresence({
+        status: "online",
+        game: {
+            name: "me getting developed",
+            type: "WATCHING"
+        }
+    }); 
+})
+
+client.on("message", async message => {
+  const prefix = "**";
+
+  // If the author's a bot, return
+  // If the message was not sent in a server, return
+  // If the message doesn't start with the prefix, return
+  if (message.author.bot) return;
+  if (!message.guild) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  // Arguments and command variable
+  // cmd is the first word in the message, aka the command
+  // args is an array of words after the command
+  // !say hello I am a bot
+  // cmd == say (because the prefix is sliced off)
+  // args == ["hello", "I", "am", "a", "bot"]
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  const cmd = args.shift().toLowerCase();
+
+  if (cmd === "ping") {
+      // Send a message
+      const msg = await message.channel.sendMessage(`🏓 Pinging....`);
+
+      // Edit the message
+      msg.edit(`🏓 Pong!\nLatency is ${Math.floor(msg.createdTimestap - message.createdTimestap)}ms\nAPI Latency is ${Math.round(client.ping)}ms`);
+  }
+
+  if (cmd === "เรียก") {
+      // Check if you can delete the message
+      if (message.deletable) message.delete();
+
+      if (args.length == 0) return message.reply(`Nothing to say?`).then(m => m.delete(5000));
+      
+      // Role color
+
+      // If the first argument is embed, send an embed,
+      // otherwise, send a normal message
+      if (args[0].toLowerCase() === "แก้ว") {
+        await message.channel.sendMessage('เข้าดิสได้ละไอเหี้ยแก้ว <@284689915743305730>');
+      }else if(args[0].toLowerCase() === "อัด") {
+        await message.channel.sendMessage('เข้าดิสได้แล้วครับนายท่าน <@302355445719367680>');
+      }else if(args[0].toLowerCase() === "เสด") {
+        await message.channel.sendMessage('เข้าดิสได้แล้วโอนี่จาง <@220526836440891392>');
+      }
+      
+  }
+});
+// When a message comes in, what's in these brackets will be executed
+client.on("message", async message => {
+    console.log(`${message.author.username} said: ${message.content}`);
+});
+client.on('message', message => { 
   if (message.content === 'ทอย') {
+    
+  for(let i = 0;i < 2;i++){
     let output = Function.dice(1,8)
   if(output == 1){
     message.reply('ว้ายได้ '+output+' เองไอควาย');
@@ -56,6 +94,7 @@ adminSibling.on('message', message => {
   message.reply('ควยเย็ดแม่โกงได้ตั้ง '+output);
   }
   }
+  }
 });
-
-adminSibling.login('NjgwMTEyMDAxNzgzMTY5MDQ3.Xk7Jxg.7u86QN4T_HCzMhxbj_X4SzsbGFQ');
+// Login the bot
+client.login(config.TOKEN);
