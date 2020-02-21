@@ -19,7 +19,20 @@ client.on("ready", () => {
         }
     }); 
 })
-
+client.on("typingStart", async channel => {
+  if(channel.id=='430359947012866048'){
+    client.on("message", async message => {
+      const prefix = ";;";
+      if (message.author.bot) return;
+      if (!message.guild) return;
+      const args = message.content.slice(prefix.length).trim().split(/ +/g);
+      const cmd = args.shift().toLowerCase();
+      if(!message.content.startsWith(prefix)){
+        channel.sendMessage('ห้องนี้ไว้ใส่เพลงนะไอเหี้ย')
+      }
+    })
+  }
+})
 client.on("message", async message => {
   const prefix = "**";
 
@@ -63,9 +76,25 @@ client.on("message", async message => {
         await message.channel.sendMessage('เข้าดิสได้แล้วครับนายท่าน <@302355445719367680>');
       }else if(args[0].toLowerCase() === "เสด") {
         await message.channel.sendMessage('เข้าดิสได้แล้วโอนี่จาง <@220526836440891392>');
+      }else if(args[0].toLowerCase() === "เป") {
+        await message.channel.sendMessage('ไอหน้าหีรีบเข้ามาดิ๊ <@264768635204141056>');
       }
       
   }
+
+  if (cmd === "เช็ค") {
+    if (message.deletable) message.delete();
+
+    if (args.length == 0) return message.reply(`Nothing to say?`).then(m => m.delete(5000));
+    if (args[0].toLowerCase() === "ชื่อ") {
+      await message.channel.sendMessage(message.author.username);
+    }else if(args[0].toLowerCase() === "รูป") {
+      await message.channel.sendMessage(message.author.username);
+    }else if(args[0].toLowerCase() === "เสด") {
+      await message.channel.sendMessage('เข้าดิสได้แล้วโอนี่จาง <@220526836440891392>');
+    }
+    
+}
 });
 // When a message comes in, what's in these brackets will be executed
 client.on("message", async message => {
