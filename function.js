@@ -33,3 +33,17 @@ exports.createChar = function createChar(name,gender,race){
     }
     });
 }
+exports.getChar = function getChar(name){
+  var docRef = db.collection("Player").doc(name);
+
+docRef.get().then(function(doc) {
+    if (doc.exists) {
+        return doc.data();
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
+}
