@@ -89,27 +89,39 @@ client.on("message", async message => {
 
 client.on('message', message => { 
   if (message.content === 'ทอย') {
-    
+    var sum = 0
   for(let i = 0;i < 2;i++){
     let output = Function.dice(1,8)
+    let test = 0
+   
   if(output == 1){
-    message.reply('ว้ายได้ '+output+' เองไอควาย');
+  message.reply('ว้ายได้ '+output+' เองไอควาย');
+  test = 1
   }else if(output == 2){
   message.reply('ได้แค่ '+output+' กระจอกพอๆกับ1แหละ');
+  test = 2
   }else if(output == 3){
   message.reply('ก็ยังดีที่ได้ '+output+' แต่ก็กระจอกอยู่ดี');
+  test = 3
   }else if(output == 4){
   message.reply('ได้แค่ '+output+' ได้แค่ครึ่งเดียว?');
+  test = 4
   }else if(output == 5){
   message.reply('โหดใช้ได้เลยนะได้ '+output+' เนี่ย');
+  test = 5
   }else if(output == 6){
   message.reply('อ่าเริ่มจะยอมรับละก็ได้ตั้ง '+output+' นี่');
+  test = 6
   }else if(output == 7){
   message.reply('มึงเริ่มเกินไปละได้ '+output+' เนี่ย');
+  test = 7
   }else if(output == 8){
   message.reply('ควยเย็ดแม่โกงได้ตั้ง '+output);
+  test = 8
   }
+  sum = sum + test
   }
+  message.reply('Sum of ลูกเต๋า '+sum);
   }
 });
 
