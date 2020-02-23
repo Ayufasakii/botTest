@@ -126,4 +126,4 @@ client.on('message', message => {
 });
 
 // Login the bot
-client.login(config.TOKEN);
+client.login(NjgxMDg0MDA2NjQ5MDM2ODEw.XlJcdA.bO9Nzwuffi1ToIG7wtZp4NJ50JE);
